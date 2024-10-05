@@ -11,14 +11,12 @@ namespace HammerFallInteractive.EcoGame.Server
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("postgresql://app:gDwVjjVnLKSQ@localhost:5432/ecogame");
+            optionsBuilder.UseNpgsql("Host=localhost;Username=app;Password=PgDwVjjVnLKSQ;Port=5432;Database=ecogame");
             base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            Database.EnsureCreatedAsync().Wait();
-
             base.OnModelCreating(modelBuilder);
         }
     }

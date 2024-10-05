@@ -12,9 +12,9 @@ namespace HammerFallInteractive.EcoGame.Server.Controllers
     public class UsersController : Controller
     {
         [HttpPost, Route("signup")]
-        public IActionResult CreateUser([FromBody] User user)
+        public async Task<IActionResult> CreateUser([FromBody] User user)
         {
-            if (string.IsNullOrWhiteSpace(user.Password) || string.IsNullOrWhiteSpace(user.RepeatedPassword) || user.Username != user.RepeatedPassword)
+            if ((string.IsNullOrWhiteSpace(user.Password) || string.IsNullOrWhiteSpace(user.RepeatedPassword)) && user.Username != user.RepeatedPassword)
                 return BadRequest(new
                 {
                     Type = "error",
@@ -41,8 +41,9 @@ namespace HammerFallInteractive.EcoGame.Server.Controllers
             using (ApplicationDatabaseContext context = new ApplicationDatabaseContext())
             {
                 context.Users.Add(user);
+                await context.SaveChangesAsync();
             }
-            return View();
+            return Ok();
         }
     }
 }
