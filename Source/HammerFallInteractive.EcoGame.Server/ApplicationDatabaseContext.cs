@@ -17,6 +17,8 @@ namespace HammerFallInteractive.EcoGame.Server
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>().HasOne(u => u.UserPlanet).WithOne(p => p.Owner).HasForeignKey<Planet>(p => p.OwnerId);
+
             base.OnModelCreating(modelBuilder);
         }
     }

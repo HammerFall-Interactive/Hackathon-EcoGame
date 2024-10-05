@@ -13,7 +13,7 @@ namespace HammerFallInteractive.EcoGame.Server.Models
         [NotMapped]
         public string RepeatedPassword { get; set; }
 
-        public int UserPlanetId { get; set; }
+        public Guid UserPlanetId { get; set; }
         public Planet UserPlanet { get; set; }
     }
 }
