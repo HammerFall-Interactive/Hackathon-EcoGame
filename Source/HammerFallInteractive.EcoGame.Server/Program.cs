@@ -24,6 +24,9 @@ namespace HammerFallInteractive.EcoGame.Server
 
             app.MapControllers();
 
+            using (ApplicationDatabaseContext dbContext = new ApplicationDatabaseContext())
+                dbContext.Database.EnsureCreated();
+
             app.Run();
         }
     }
