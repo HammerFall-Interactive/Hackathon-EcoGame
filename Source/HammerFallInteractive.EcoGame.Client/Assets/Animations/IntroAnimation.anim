@@ -25,15 +25,15 @@ AnimationClip:
         time: 0
         value: -90
         inSlope: 0
-        outSlope: 57.620693
+        outSlope: 63.07491
         tangentMode: 65
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 28.033333
-        value: 1525.3
-        inSlope: 57.620693
+        value: 1678.2
+        inSlope: 63.07491
         outSlope: 0
         tangentMode: 5
         weightedMode: 0
@@ -61,18 +61,18 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 28.033333
+        time: 23.4
         value: 0
         inSlope: 0
-        outSlope: 0.14354067
+        outSlope: 0.15075377
         tangentMode: 65
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 35
+        time: 30.033333
         value: 1
-        inSlope: 0.14354067
+        inSlope: 0.15075377
         outSlope: 0
         tangentMode: 5
         weightedMode: 0
@@ -178,7 +178,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 35
+    m_StopTime: 30.033333
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -202,15 +202,15 @@ AnimationClip:
         time: 0
         value: -90
         inSlope: 0
-        outSlope: 57.620693
+        outSlope: 63.07491
         tangentMode: 65
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 28.033333
-        value: 1525.3
-        inSlope: 57.620693
+        value: 1678.2
+        inSlope: 63.07491
         outSlope: 0
         tangentMode: 5
         weightedMode: 0
@@ -238,18 +238,18 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 28.033333
+        time: 23.4
         value: 0
         inSlope: 0
-        outSlope: 0.14354067
+        outSlope: 0.15075377
         tangentMode: 65
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 35
+        time: 30.033333
         value: 1
-        inSlope: 0.14354067
+        inSlope: 0.15075377
         outSlope: 0
         tangentMode: 5
         weightedMode: 0
@@ -309,7 +309,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 35
+  - time: 30.033333
     functionName: StartIntroDlg
     data: 
     objectReferenceParameter: {fileID: 11400000, guid: 4ac1d30d0a99375469b372f8b91f980d, type: 2}
