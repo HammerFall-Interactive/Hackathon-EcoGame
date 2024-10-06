@@ -1,6 +1,8 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI; 
 
 [System.Serializable]
@@ -149,5 +151,12 @@ public class QuizManager : MonoBehaviour
         //Переход на предыдущую сцену.
 
         //FindObjectsByType<Button>(FindObjectsInactive.Include, FindObjectsSortMode.None)
+        StartCoroutine(WaitAndExit());
+    }
+
+    IEnumerator WaitAndExit()
+    {
+        yield return new WaitForSeconds(5f);
+        SceneManager.LoadScene("MainScene");
     }
 }

@@ -22,7 +22,7 @@ public class IntroSceneScripts : MonoBehaviour
 
     private void Start()
     {
-        if (SystemState.SnakePlayed)
+        if (SystemState.PortalsVisited)
         {
             GetComponent<Animator>().SetTrigger("Intro2");
         }
@@ -63,7 +63,7 @@ public class IntroSceneScripts : MonoBehaviour
         planetImage.sprite = planetHealthySprite;
         taskToggle.isOn = true;
         taskToggleBg.color = toggleDoneColor;
-        wateringCanButton.interactable = true;
+        wateringCanButton.interactable = false;
         wateringCanText.text = "0";
     }
 
