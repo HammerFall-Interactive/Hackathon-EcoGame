@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Snake.unity
     guid: 75045ae00bdb1cf43a301e5701cd8028
+  - enabled: 1
+    path: Assets/Scenes/QuizScene.unity
+    guid: 5e0f3efa74fc0cb41bcd35ca779bccdc
   m_configObjects: {}
