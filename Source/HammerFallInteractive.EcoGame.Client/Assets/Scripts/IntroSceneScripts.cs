@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class IntroSceneScripts : MonoBehaviour
 {
@@ -20,9 +21,8 @@ public class IntroSceneScripts : MonoBehaviour
         GetComponent<Animator>().SetTrigger("Intro2");
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ChangeScene(string sceneName)
     {
-
+        SceneManager.LoadScene(sceneName);
     }
 }
