@@ -2,7 +2,7 @@
  * 
  * Dialogue System Controller - Lite Edition
  * This file is a part of in house Dialogue System - DialogueForge
- * Copying, Distribuuting or Using without explicit author permission is prohibited!
+ * Copying, Distributing or Using without explicit author permission is prohibited!
  * 
  * Author: craftersmine @ HammerFall Interactive 
  */
@@ -123,14 +123,14 @@ namespace HammerFallInteractive.EcoGame.Dialogues
 
         public void HideDialogueBox()
         {
-            if (dialogueTextContainer == null)
+            if (dialogueContainerAnimator == null)
                 dialogueContainerAnimator = GetComponent<Animator>();
             dialogueContainerAnimator.SetBool("IsHidden", true);
         }
 
         public void ShowDialogueBox()
         {
-            if (dialogueTextContainer == null)
+            if (dialogueContainerAnimator == null)
                 dialogueContainerAnimator = GetComponent<Animator>();
             dialogueContainerAnimator.SetBool("IsHidden", false);
         }
