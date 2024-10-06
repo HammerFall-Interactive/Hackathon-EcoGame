@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider2D))]
@@ -6,14 +8,18 @@ public class Snake : MonoBehaviour
 {
     public Transform segmentPrefab;
     public Vector2Int direction = Vector2Int.right;
-    public float speed = 20f;
-    public float speedMultiplier = 1f;
+    public float speed = 10f;
+    public float speedMultiplier = 0.5f;
     public int initialSize = 4;
     public bool moveThroughWalls = false;
 
     private readonly List<Transform> segments = new List<Transform>();
     private Vector2Int input;
     private float nextUpdate;
+
+    public int foodcounter = 0;
+    public TextMeshProUGUI gameStatusText;
+    public bool RDY = false;
 
     private void Start()
     {
@@ -45,13 +51,14 @@ public class Snake : MonoBehaviour
         if (Time.time < nextUpdate) {
             return;
         }
+
         if (input != Vector2Int.zero) {
             direction = input;
         }
-
         for (int i = segments.Count - 1; i > 0; i--) {
             segments[i].position = segments[i - 1].position;
         }
+
         int x = Mathf.RoundToInt(transform.position.x) + direction.x;
         int y = Mathf.RoundToInt(transform.position.y) + direction.y;
         transform.position = new Vector2(x, y);
@@ -64,18 +71,21 @@ public class Snake : MonoBehaviour
         Transform segment = Instantiate(segmentPrefab);
         segment.position = segments[segments.Count - 1].position;
         segments.Add(segment);
+        foodcounter++;
     }
 
     public void ResetState()
     {
         direction = Vector2Int.right;
         transform.position = Vector3.zero;
+
         for (int i = 1; i < segments.Count; i++) {
             Destroy(segments[i].gameObject);
         }
 
         segments.Clear();
         segments.Add(transform);
+
         for (int i = 0; i < initialSize - 1; i++) {
             Grow();
         }
@@ -102,7 +112,43 @@ public class Snake : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Obstacle"))
         {
-            ResetState();
+            if (foodcounter > 15)
+            {
+                gameStatusText.text = "Вы получили гидротерраформинговую лейку!";
+                HideStatusText();
+                for (int i = 0; i < segments.Count; i++)
+                {
+                    Destroy(segments[i].gameObject);
+                }
+                segments.Clear();
+                RDY = true;
+                GameObject[] foodObjects = GameObject.FindGameObjectsWithTag("Food");
+                foreach (GameObject food in foodObjects)
+                {
+                    Destroy(food);
+                }
+                HideStatusText();
+                //Переход на сцену с планетой
+
+            }
+            else 
+            {
+                gameStatusText.text = "Game Over!";
+
+                for (int i = 0; i < segments.Count; i++)
+                {
+                    Destroy(segments[i].gameObject);
+                }
+                segments.Clear();
+                GameObject[] foodObjects = GameObject.FindGameObjectsWithTag("Food");
+                foreach (GameObject food in foodObjects)
+                {
+                    Destroy(food);
+                }
+                HideStatusText();
+                //Переход на сцену с планетой
+            }
+                
         }
         else if (other.gameObject.CompareTag("Wall"))
         {
@@ -113,7 +159,11 @@ public class Snake : MonoBehaviour
             }
         }
     }
-
+    private IEnumerator HideStatusText()
+    {
+        yield return new WaitForSeconds(3f);
+        gameStatusText.text = "";
+    }
     private void Traverse(Transform wall)
     {
         Vector3 position = transform.position;
