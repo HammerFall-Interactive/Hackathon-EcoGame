@@ -19,7 +19,7 @@ public class Snake : MonoBehaviour
 
     public int foodcounter = 0;
     public TextMeshProUGUI gameStatusText;
-    public bool RDY = false;
+    public bool ToolRDY = false;
 
     private void Start()
     {
@@ -112,7 +112,7 @@ public class Snake : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Obstacle"))
         {
-            if (foodcounter > 15)
+            if (foodcounter > 12)
             {
                 gameStatusText.text = "Вы получили гидротерраформинговую лейку!";
                 HideStatusText();
@@ -121,14 +121,19 @@ public class Snake : MonoBehaviour
                     Destroy(segments[i].gameObject);
                 }
                 segments.Clear();
-                RDY = true;
+                ToolRDY = true;
                 GameObject[] foodObjects = GameObject.FindGameObjectsWithTag("Food");
                 foreach (GameObject food in foodObjects)
                 {
                     Destroy(food);
                 }
                 HideStatusText();
-                //Переход на сцену с планетой
+
+                PlayerPrefs.SetInt("ToolRDY", ToolRDY ? 1 : 0); // Сохраняем значение ToolRDY
+                PlayerPrefs.Save(); // Сохраняем изменения в памяти
+                                    //Переход на сцену с планетой (MainScene)
+
+                //bool ToolRDY = PlayerPrefs.GetInt("ToolRDY", 0) == 1; // Получаем значение ToolRDY в ToolRDY
 
             }
             else 
@@ -146,7 +151,9 @@ public class Snake : MonoBehaviour
                     Destroy(food);
                 }
                 HideStatusText();
-                //Переход на сцену с планетой
+                //Переход на сцену с планетой (MainScene)
+
+
             }
                 
         }
