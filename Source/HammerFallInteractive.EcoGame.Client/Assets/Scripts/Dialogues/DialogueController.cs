@@ -40,10 +40,12 @@ namespace HammerFallInteractive.EcoGame.Dialogues
 
         public void Start()
         {
-            if (currentDialogue == null)
-                OnDialogueEnded();
-            else
-                StartDialogue(currentDialogue);
+            dialogueContainerAnimator = GetComponent<Animator>();
+
+            //if (currentDialogue == null)
+            //    OnDialogueEnded();
+            //else
+            //    StartDialogue(currentDialogue);
         }
 
         private void Update()
@@ -101,6 +103,8 @@ namespace HammerFallInteractive.EcoGame.Dialogues
                 Debug.Log("Writing dialogue entry: " + currentEntry.id);
                 onDialogueEntryStarted?.Invoke(currentEntry);
                 dialogueTextContainer.text = currentEntry.text;
+                currentDialogueTextIndex++;
+                isTypewriterAnimationEnded = true;
             }
             else
             {
@@ -119,11 +123,15 @@ namespace HammerFallInteractive.EcoGame.Dialogues
 
         public void HideDialogueBox()
         {
+            if (dialogueTextContainer == null)
+                dialogueContainerAnimator = GetComponent<Animator>();
             dialogueContainerAnimator.SetBool("IsHidden", true);
         }
 
         public void ShowDialogueBox()
         {
+            if (dialogueTextContainer == null)
+                dialogueContainerAnimator = GetComponent<Animator>();
             dialogueContainerAnimator.SetBool("IsHidden", false);
         }
 
