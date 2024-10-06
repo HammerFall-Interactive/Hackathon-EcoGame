@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class Snake : MonoBehaviour
@@ -19,7 +21,11 @@ public class Snake : MonoBehaviour
 
     public int foodcounter = 0;
     public TextMeshProUGUI gameStatusText;
+    public TMP_Text scoreText;
     public bool ToolRDY = false;
+
+    private float timer = 0;
+    private bool shouldReturnToMain = false;
 
     private void Start()
     {
@@ -44,6 +50,13 @@ public class Snake : MonoBehaviour
                 input = Vector2Int.left;
             }
         }
+
+        scoreText.text = string.Format("Мусора собрано: {0}", foodcounter - 3);
+        if (foodcounter < 12 + 3)
+            scoreText.color = Color.yellow;
+        else
+            scoreText.color = Color.green;
+
     }
 
     private void FixedUpdate()
@@ -112,10 +125,10 @@ public class Snake : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Obstacle"))
         {
-            if (foodcounter > 12)
+            if (foodcounter > 12 + 2)
             {
                 gameStatusText.text = "Вы получили гидротерраформинговую лейку!";
-                HideStatusText();
+                //HideStatusText();
                 for (int i = 0; i < segments.Count; i++)
                 {
                     Destroy(segments[i].gameObject);
@@ -127,10 +140,9 @@ public class Snake : MonoBehaviour
                 {
                     Destroy(food);
                 }
-                HideStatusText();
+                StartCoroutine(HideStatusText());
 
-                PlayerPrefs.SetInt("ToolRDY", ToolRDY ? 1 : 0); // Сохраняем значение ToolRDY
-                PlayerPrefs.Save(); // Сохраняем изменения в памяти
+                SystemState.ToolReady = ToolRDY; // Сохраняем изменения в памяти
                                     //Переход на сцену с планетой (MainScene)
 
                 //bool ToolRDY = PlayerPrefs.GetInt("ToolRDY", 0) == 1; // Получаем значение ToolRDY в ToolRDY
@@ -150,12 +162,12 @@ public class Snake : MonoBehaviour
                 {
                     Destroy(food);
                 }
-                HideStatusText();
+                //StartCoroutine(HideStatusText());
                 //Переход на сцену с планетой (MainScene)
-
-
             }
-                
+            
+            SystemState.SnakePlayed = true;
+            FindObjectOfType<SnakeMainSceneLoader>().shouldReturnToMain = true;
         }
         else if (other.gameObject.CompareTag("Wall"))
         {
@@ -166,6 +178,7 @@ public class Snake : MonoBehaviour
             }
         }
     }
+
     private IEnumerator HideStatusText()
     {
         yield return new WaitForSeconds(3f);
